@@ -2,3 +2,4 @@
 *.pyc
 Thumbs.db
 *._*
+.DS_Store
