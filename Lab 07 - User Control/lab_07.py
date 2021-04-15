@@ -2,7 +2,7 @@ import arcade
 
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
-MOVEMENT_SPEED = 15
+PLAYER_MOVEMENT_SPEED = 15
 
 
 class Ball:
@@ -38,7 +38,6 @@ class Ball:
             self.position_y = SCREEN_HEIGHT - self.radius
         
 
-
 class MyGame(arcade.Window):
 
     def __init__(self, width, height, title):
@@ -50,10 +49,10 @@ class MyGame(arcade.Window):
         # So we just see our object, not the pointer.
         self.set_mouse_visible(False)
 
-        arcade.set_background_color(arcade.color.ASH_GREY)
+        arcade.set_background_color(arcade.color.BLACK)
 
         # Create our ball
-        self.ball = Ball(50, 50, 0, 0, 15, arcade.color.AUBURN)
+        self.ball = Ball(50, 50, 0, 0, 15, arcade.color.WHITE)
 
     def on_draw(self):
         """ Called whenever we need to draw the window. """
@@ -65,20 +64,20 @@ class MyGame(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """ Called whenever the user presses a key. """
-        if key == arcade.key.LEFT:
-            self.ball.change_x = -MOVEMENT_SPEED
-        elif key == arcade.key.RIGHT:
-            self.ball.change_x = MOVEMENT_SPEED
-        elif key == arcade.key.UP:
-            self.ball.change_y = MOVEMENT_SPEED
-        elif key == arcade.key.DOWN:
-            self.ball.change_y = -MOVEMENT_SPEED
+        if key == arcade.key.LEFT or key == arcade.key.A:
+            self.ball.change_x = -PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT or key == arcade.key.D:
+            self.ball.change_x = PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.UP or key == arcade.key.W:
+            self.ball.change_y = PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.DOWN or key == arcade.key.S:
+            self.ball.change_y = -PLAYER_MOVEMENT_SPEED
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
-        if key == arcade.key.LEFT or key == arcade.key.RIGHT:
+        if key == arcade.key.LEFT or key == arcade.key.A or key == arcade.key.RIGHT or key == arcade.key.D:
             self.ball.change_x = 0
-        elif key == arcade.key.UP or key == arcade.key.DOWN:
+        elif key == arcade.key.UP or key == arcade.key.W or key == arcade.key.DOWN or key == arcade.key.S:
             self.ball.change_y = 0
 
 
