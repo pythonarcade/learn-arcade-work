@@ -5,3 +5,4 @@ amongus
 imposter
 bacca""")
 print("-_-")
+print("\namongus sus \n\'ez\'")
