@@ -1,0 +1,1 @@
+# This is a code that creates a picture of a wintry morning.
