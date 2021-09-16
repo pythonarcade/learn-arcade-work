@@ -49,6 +49,17 @@ arcade.draw_arc_filled(300, 320, 40, 200, (237, 201, 43), 0, 180)
 # (400, 400), (370, 320), (430, 320)
 arcade.draw_rectangle_filled(400, 320, 20, 40, arcade.csscolor.SIENNA)
 arcade.draw_triangle_filled(400, 500, 370, 320, 430, 320, arcade.csscolor.DARK_GREEN)
+
+# Draw a tree using a polygon with a list of points
+arcade.draw_rectangle_filled(500, 320, 20, 40, arcade.csscolor.SIENNA)
+arcade.draw_polygon_filled(((500, 400),
+                            (480, 360),
+                            (470, 320),
+                            (530, 320),
+                            (520, 340)
+                            ),
+                           arcade.csscolor.DARK_GREEN)
+
 arcade.finish_render()
 # Keep the window up until someone closes it.
 arcade.run()
