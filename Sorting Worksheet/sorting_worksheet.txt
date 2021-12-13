@@ -1,0 +1,59 @@
+<name>
+<date>
+
+1. Write code to swap the values 25 and 40.
+
+my_list = [55, 41, 52, 68, 45, 27, 40, 25, 37, 26]
+
+2. Write code to swap the values 2 and 27.
+
+my_list = [27, 32, 18,  2, 11, 57, 14, 38, 19, 91]
+
+3. Why does the following code not work? Explain it, don't just list working code.
+
+my_list = [70, 32, 98, 88, 92, 36, 81, 83, 87, 66]
+temp = my_list[0]
+my_list[1] = my_list[0]
+my_list[0] = temp
+
+4. Show how the following numbers can be sorted using the selection sort. Show
+the numbers after each iteration of the outer loop, similar to what is shown in
+the book. I am NOT looking for a copy of the code to do the sort. If you include
+any code for problems 4-7 you are doing it wrong.
+
+97   74    8   22   47   92   18   11    0   60
+
+5. Show how the following numbers can be sorted using the selection sort:
+
+73   92   28   47   30   58    0   36   31   25
+
+6. Show how the following numbers can be sorted using the INSERTION sort.
+(Note: If you think the 0 gets immediately sorted into position, you are doing
+it wrong. Go back and re-read how this sort works.)
+
+97   74    8   22   47   92   18   11    0   60
+
+7. Show how the following numbers can be sorted using the insertion sort:
+
+73   92   28   47   30   58    0   36   31   25
+
+8. Explain what `min_pos` does in the selection sort.
+
+9. Explain what `cur_pos` does in the selection sort.
+
+10. Explain what `scan_pos` does in the selection sort.
+
+11. Explain what `key_pos` and `key_value` are in the insertion sort.
+
+12. Explain `scan_pos` in the insertion sort.
+
+13. Look at the example sort program at the very end of this chapter:
+
+https://learn.arcade.academy/en/latest/chapters/30_sorting/sorting.html
+
+Modify the sorts to print the number of times the inside loop is run, and the
+number of times the outside loop is run. Modify the program to work with a list
+of 100. Paste the code you used here. Run the program and list the numbers you
+got here. (DON'T FORGET TO INCLUDE THE RESULTS!) Inside loop for selection sort
+should be about 5,000, and insertion sort 2,500. Double-check if you don't get
+numbers close to these.
