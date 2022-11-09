@@ -25,7 +25,15 @@ arcade.draw_ellipse_filled(1, 250, 695, 395, arcade.csscolor.DARK_GREEN)
 
 arcade.draw_lrtb_rectangle_filled(0, 800, 180, 0, arcade.color.MINT_GREEN)
 
-
+arcade.draw_arc_outline(300,
+                        340,
+                        70,
+                        50,
+                        arcade.csscolor.BLACK,
+                        20,
+                        180,
+                        3,
+                        0)
 # --- Finish drawing ---
 arcade.finish_render()
 
