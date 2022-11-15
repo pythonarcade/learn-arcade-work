@@ -7,14 +7,14 @@ for row in range(10):
     for column in range( row - 1, 0, -1 ):
         print(column, end=" ")
     print()    
-for row in range (10):
+for row2 in range (10):
     
-    for space2 in range(row + 2):
+    for space2 in range(row2 + 2):
         print(" ", end=" ")
-    for column in range(1, 9 - row ):
-        print(column, end=" ")
-    for column in range(7 - row, 0, -1):
-        print(column, end=" ")
+    for column2 in range(1, 9 - row2 ):
+        print(column2, end=" ")
+    for column2 in range(7 - row2, 0, -1):
+        print(column2, end=" ")
     
 
     print()
