@@ -6,17 +6,6 @@ def main():
     """)
     done = False
     choise = (input("What is your choice? "))
-    if choise.upper == Q:
-            done = True
-
-    while done is False:
-        print("""
-        A. Drink from your canteen.
-        B. Ahead moderate speed.
-        C. Ahead full speed.
-        D. Stop for the night.
-        E. Status check.
-        Q. Quit.
-        """)
+    
     
 main()
