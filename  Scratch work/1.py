@@ -1,5 +1,7 @@
-long = float(input("введите длину комнаты "))
-wide = float(input("введите ширину комнаты "))
-s = long * wide
-print(round(s, 2), "см2")
+for row in range(10):      
 
+  
+    for column in range(1, row + 1):
+        print(column, end=" ")
+    
+    print()  
