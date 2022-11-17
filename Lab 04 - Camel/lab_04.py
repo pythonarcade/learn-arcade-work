@@ -5,7 +5,33 @@ def main():
     desert trek and out run the natives.    
     """)
     done = False
-    choise = (input("What is your choice? "))
+    way_miles = 0
+    camael_tired = 0
+    water_balbance = 0
+    water_botles = 3
+    tusems_way = -20
+
+    while not done:
+      
+        choise = (input("""
+        A. Drink from your canteen.
+        B. Ahead moderate speed.
+        C. Ahead full speed.
+        D. Stop for the night.
+        E. Status check.
+        Q. Quit.
+        
+        What is your choice? """))
+        if choise.upper() == "Q":
+            done = True
+            print("you quit")
+        elif choise.upper() == "E":
+            print("Miles traveled:", way_miles)
+            print("Drinks in canteen:", water_botles)
+            print("The natives are  " + str(way_miles - tusems_way) + "  miles behind you.")
+            
+            
+
     
     
 main()
