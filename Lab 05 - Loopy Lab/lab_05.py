@@ -3,7 +3,7 @@ import arcade
 
 def draw_section_outlines():
     # Draw squares on bottom
-    arcade.draw_rectangle_outline(150, 150, 300, 300, arcade.color.GRAY)
+    arcade.draw_rectangle_outline(150, 150, 300, 300, arcade.color.RED)
     arcade.draw_rectangle_outline(450, 150, 300, 300, arcade.color.BLACK)
     arcade.draw_rectangle_outline(750, 150, 300, 300, arcade.color.BLACK)
     arcade.draw_rectangle_outline(1050, 150, 300, 300, arcade.color.BLACK)
@@ -17,8 +17,8 @@ def draw_section_outlines():
 def draw_section_1():
     for row in range(30):   
         for column in range(30):
-            x = 5  # Instead of zero, calculate the proper x location using 'column'
-            y = 5  # Instead of zero, calculate the proper y location using 'row'
+            x = 30  # Instead of zero, calculate the proper x location using 'column'
+            y = 30  # Instead of zero, calculate the proper y location using 'row'
             
             arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
         
