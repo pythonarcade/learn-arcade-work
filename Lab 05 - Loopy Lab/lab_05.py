@@ -19,8 +19,10 @@ def draw_section_1():
     for row in range(30): 
          
         for column in range(30):
-            x = 5  # Instead of zero, calculate the proper x location using 'column'
-            y = 5 # Instead of zero, calculate the proper y location using 'row'
+            x = 300 # Instead of zero, calculate the proper x location using 'column'
+            y = 300 # Instead of zero, calculate the proper y location using 'row'
+            x = column * 10 +5
+            y = row * 10 + 5
             arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
     
 
