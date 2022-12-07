@@ -31,6 +31,18 @@ def draw_section_1():
         
 
 def draw_section_2():
+
+    for row in range(30): 
+         
+        for column in range(30):
+            x = 300 # Instead of zero, calculate the proper x location using 'column'
+            y = 300 # Instead of zero, calculate the proper y location using 'row'
+            x = 300 + column * 10 +5
+            y = row * 10 + 5
+            if column % 2 == 0:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+            else:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.BLACK)
     # Below, replace "pass" with your code for the loop.
     # Use the modulus operator and an if statement to select the color
     # Don't loop from 30 to 60 to shift everything over, just add 300 to x.
@@ -38,17 +50,47 @@ def draw_section_2():
 
 
 def draw_section_3():
+    for row in range(30): 
+         
+        for column in range(30):
+            x = 300 # Instead of zero, calculate the proper x location using 'column'
+            y = 300 # Instead of zero, calculate the proper y location using 'row'
+            x = 600 + column * 10 +5
+            y = row * 10 + 5
+            if row % 2 == 0:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+            else:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.BLACK)
     # Use the modulus operator and an if/else statement to select the color.
     # Don't use multiple 'if' statements.
     pass
 
 
 def draw_section_4():
+    for row in range(30): 
+         
+        for column in range(30):
+            x = 300 # Instead of zero, calculate the proper x location using 'column'
+            y = 300 # Instead of zero, calculate the proper y location using 'row'
+            x = 900 + column * 10 +5
+            y = row * 10 + 5
+            if row % 2 == 0 and column %2 ==0:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+            else:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.BLACK)
     # Use the modulus operator and just one 'if' statement to select the color.
     pass
 
 
 def draw_section_5():
+    for row in range(30): 
+        
+        for column in range(30):
+            x = 300 # Instead of zero, calculate the proper x location using 'column'
+            y = 300 # Instead of zero, calculate the proper y location using 'row'
+            x =  column * 10 + 5 
+            y = n + row * 10 + 5
+            arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
     # Do NOT use 'if' statements to complete 5-8. Manipulate the loops instead.
     pass
 
