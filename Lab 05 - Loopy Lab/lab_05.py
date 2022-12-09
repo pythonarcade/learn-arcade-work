@@ -122,12 +122,13 @@ def draw_section_7():
             arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
     pass
 
+
 def draw_section_8():
-    for row in range(35):
-        for column in range(row + 6):
-            x = (34 - column) * 10 + 905
-            y = row * 10 + 305
-            arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+            for row in range(35):
+                for column in range(row + 6):
+                    x = (34 - column) * 10 + 905
+                    y = row * 10 + 305
+                    arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
 
 
 
