@@ -5,7 +5,7 @@ age = int(30)
 print(type(firstName))
 print(type(age))
 print(f'Hello, my name is {firstName} {lastName}.')
-print(f'"I am \n {age} \n years \n old"')
+print(f'"I am \n {age} \n years \n old."')
 print("""I really
         wish
             that I
