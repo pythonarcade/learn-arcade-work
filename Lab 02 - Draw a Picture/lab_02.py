@@ -29,18 +29,20 @@ arcade.draw_circle_filled(610, 290, 3, arcade.color.BLACK)
 #Door Window
 arcade.draw_ellipse_outline(625, 320, 30, 50, arcade.color.BLACK)
 
+#Light From House
+arcade.draw_ellipse_filled(625, 320, 28, 48, arcade.color.DARK_YELLOW)
+arcade.draw_rectangle_filled(420, 320, 123, 48, arcade.color.DARK_YELLOW)
+arcade.draw_rectangle_filled(420, 450, 58, 58, arcade.color.DARK_YELLOW)
+arcade.draw_rectangle_filled(625, 450, 58, 58, arcade.color.DARK_YELLOW)
+
 #Window at Ground Level
 arcade.draw_rectangle_outline(420, 320, 125, 50, arcade.color.BLACK, 2)
 
 #Upper Windows
 arcade.draw_rectangle_outline(420, 450, 60, 60, arcade.color.BLACK, 2)
 arcade.draw_rectangle_outline(625, 450, 60, 60, arcade.color.BLACK, 2)
-
-#Light From House
-arcade.draw_ellipse_filled(625, 320, 28, 48, arcade.color.DARK_YELLOW)
-arcade.draw_rectangle_filled(420, 320, 123, 48, arcade.color.DARK_YELLOW)
-arcade.draw_rectangle_filled(420, 450, 58, 58, arcade.color.DARK_YELLOW)
-arcade.draw_rectangle_filled(625, 450, 58, 58, arcade.color.DARK_YELLOW)
+arcade.draw_line(390, 450, 450, 450, arcade.color.BLACK, 2)
+arcade.draw_line(595, 450, 655, 450, arcade.color.BLACK, 2)
 
 #moon
 arcade.draw_circle_filled(100, 650, 50, arcade.color.GHOST_WHITE)
