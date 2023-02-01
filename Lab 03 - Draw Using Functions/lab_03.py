@@ -28,9 +28,9 @@ def draw_house():
 def stars(point_list):
     arcade.draw_points(point_list, arcade.color.GHOST_WHITE, 2)
 
-def moon():
-    arcade.draw_circle_filled(100, 650, 50, arcade.color.GHOST_WHITE)
-    arcade.draw_circle_filled(120, 650, 40, (27, 27, 27))
+def moon(x, y):
+    arcade.draw_circle_filled(x, y, 50, arcade.color.GHOST_WHITE)
+    arcade.draw_circle_filled(x + 20, y, 40, (27, 27, 27))
 
 def ground():
     arcade.draw_lrtb_rectangle_filled(0, 999, 300, 0, (26, 36, 33))
@@ -67,7 +67,7 @@ def main():
     draw_upper_windows(390, 450)
     draw_upper_windows(505, 450)
     draw_upper_windows(620, 450)
-    moon()
+    moon(100, 650)
 
     tree(50, 290)
     tree(120, 290)
