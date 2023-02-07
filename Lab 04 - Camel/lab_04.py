@@ -5,22 +5,17 @@ import random
 # natives move up function
 def natives_move_up(): return random.randrange(0, 14)
 
-
 # full speed function
 def full_speed(): return random.randrange(10, 20)
-
 
 # moderate speed function
 def moderate_speed(): return random.randrange(5, 12)
 
-
 # camel tiredness function
 def camel_tiredness_function(): return random.randrange(1, 3)
 
-
 # oasis chance function
 def oasis_chance(): return random.randrange(1, 20)
-
 
 # defining main function
 def main():
@@ -174,6 +169,7 @@ def main():
                 print("")
 
         if not done:
+            # winning statement
             if miles_traveled >= 200:
                 print("You won and got the camel across the desert! Congrats on being alive!")
                 print("")
