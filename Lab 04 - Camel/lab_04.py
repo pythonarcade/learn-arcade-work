@@ -14,24 +14,31 @@ def full_speed(): return random.randrange(10, 20)
 def moderate_speed(): return random.randrange(5, 12)
 
 
+# camel tiredness function
+def camel_tiredness_function(): return random.randrange(1, 3)
+
+
+# oasis chance function
+def oasis_chance(): return random.randrange(1, 20)
+
+
 # defining main function
 def main():
-
-    #variables
+    # variables
     done = False
-    miles_traveled = 0
+    miles_traveled = 190
     thirst = 0
     camel_tiredness = 0
     natives_traveled = -20
-    drink = 3
-
-    print(natives_move_up())
+    canteen = 3
+    oasis = random.randrange(1, 20)
 
     # Initial statement
     print("Welcome to Camel!")
     print("You have stolen a camel to make your way across the great Mobi desert.")
     print("The natives want their camel back and are chasing you down! Survive your")
     print("desert trek and out run the natives.")
+    print("")
 
     # starting while loop
     while not done:
@@ -47,60 +54,131 @@ def main():
 
         # quit statement
         if user_choice.upper() == "Q":
-            print("Y: yes")
-            print("N: no")
+            print("Y: Yes")
+            print("N: No")
             print("")
             user_quit_choice = input("What is your choice? ")
 
             # quit check
             if user_quit_choice.upper() == "Y":
-                print("You have excited the game")
+                print("You have exited the game")
                 done = True
 
-        # status_check
-        elif user_choice == "e":
+        # status check
+        elif user_choice.upper() == "E":
             print("Miles traveled:", miles_traveled)
-            print("Drinks left in canteen:", drink)
+            print("Drinks left in canteen:", canteen)
             print("The natives are", miles_traveled - natives_traveled, "miles behind you!")
             print("")
 
-        # stop_for_the_night
-        elif user_choice == "d":
+        # stop for the night
+        elif user_choice.upper() == "D":
             camel_tiredness = 0
-            natives_traveled = natives_traveled + natives_move_up()
-            print("The camel is happy! The natives move up", natives_traveled, "miles.")
+            natives_move = natives_move_up()
+            natives_traveled = natives_traveled + natives_move
+            print("The camel is happy! The natives move up", natives_move, "miles.")
             print("")
 
-        # full_speed
-        elif user_choice == "c":
-            print("You have traveled", full_speed, "miles.")
-            miles_traveled = miles_traveled + full_speed
-            natives_traveled = natives_traveled + natives_move_up
+        # full speed
+        elif user_choice.upper() == "C":
+            full_speed_user = full_speed()
+            full_speed_natives = natives_move_up()
+            miles_traveled = miles_traveled + full_speed_user
+            natives_traveled = natives_traveled + full_speed_natives
+            camel_tiredness = camel_tiredness + camel_tiredness_function()
             thirst = thirst + 1
-            camel_tiredness = random.randrange(1, 3)
-            print("camel tiredness:", camel_tiredness)
-            print("The natives move up", natives_move_up, "miles.")
+            full_speed_oasis = oasis_chance()
+            print("You have traveled", full_speed_user, "miles.")
+            print("Camel tiredness:", camel_tiredness)
+            print("The natives move up", full_speed_natives, "miles.")
+            if oasis == full_speed_oasis:
+                canteen = 3
+                thirst = 0
+                camel_tiredness = 0
+                print("You found an oasis!")
+                print("Drinks left in canteen:", canteen)
+                print("Thirst:", thirst)
+                print("Camel tiredness:", camel_tiredness)
+                print("")
+            else:
+                print("")
+
+        # moderate speed
+        elif user_choice.upper() == "B":
+            moderate_speed_user = moderate_speed()
+            moderate_speed_natives = natives_move_up()
+            miles_traveled = miles_traveled + moderate_speed_user
+            natives_traveled = natives_traveled + moderate_speed_natives
+            camel_tiredness = camel_tiredness + 1
+            thirst = thirst + 1
+            moderate_speed_oasis = oasis_chance()
+            print("You have traveled", moderate_speed_user, "miles.")
+            print("Camel tiredness:", camel_tiredness)
+            print("The natives move up", moderate_speed_natives, "miles.")
+            if oasis == moderate_speed_oasis:
+                canteen = 3
+                thirst = 0
+                camel_tiredness = 0
+                print("You found an oasis!")
+                print("Drinks left in canteen:", canteen)
+                print("Thirst:", thirst)
+                print("Camel tiredness:", camel_tiredness)
+                print("")
+            else:
+                print("")
+
+        # Drink from canteen
+        elif user_choice.upper() == "A":
+            if canteen != 0:
+                print("You take a drink from your canteen.")
+                canteen = canteen - 1
+                thirst = 0
+                print("")
+            else:
+                print("You have no more water!")
+                print("")
+
+        # you are thirsty
+        if 4 <= thirst < 6:
+            print("You are thirsty!")
             print("")
 
-        # moderate_speed
-        elif user_choice == "b":
-            print("you have traveled %d miles" % (moderate_speed,))
-            miles_traveled += full_speed
-            natives_traveled += natives_move_up
-            thirst += 1
-            camel_tired = camel_tired + random.randrange(1, 3)
-            print("camel tiredness %d" % (camel_tired,))
-            print("move the natives up to %d miles" % (natives_move_up,))
+        # you died of thirst
+        elif thirst >= 6:
+            print("You died of thirsty!")
             print("")
+            done = True
 
-        # drink_to_canteen
-        elif user_choice == "a":
-            print("you drink from your canteen")
-            drink = drink - 1
-            thirst = 0
-            print("")
+        if not done:
+            # your camel is getting tired
+            if 5 <= camel_tiredness < 8:
+                print("Your camel is getting tired.")
+                print("")
 
-        print(natives_move_up)
+            # your camel is dead
+            elif camel_tiredness >= 8:
+                print("Your camel is dead.")
+                print("")
+                done = True
+
+        if not done:
+            # if the natives have caught up
+            if natives_traveled >= miles_traveled:
+                print("The natives have caught you.")
+                print("")
+                done = True
+
+            # the natives are getting close
+            elif natives_traveled >= miles_traveled - 10:
+                print("The natives are getting close!")
+                print("")
+
+        if not done:
+            if miles_traveled >= 200:
+                print("You won and got the camel across the desert! Congrats on being alive!")
+                print("")
+                done = True
+
 
 # calling the main function
 main()
