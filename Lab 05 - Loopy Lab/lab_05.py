@@ -81,12 +81,7 @@ def draw_section_7():
 
 
 def draw_section_8():
-    for row in range(30, -1, -1):
-        for column in range(row):
-            print(row, column)
-            x = (row * 10) + 905
-            y = (column * 10) + 305
-            arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+    pass
 
 
 def main():
