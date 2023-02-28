@@ -60,6 +60,7 @@ def main():
 
     # Create while loop to loop through the game until player is done
     while not done:
+        # room 1 start
         if current_room == room_list[0]:
             print()
             print(room_list[0].description)
@@ -87,7 +88,9 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 1 end
 
+        # room 2 start
         if current_room == room_list[1]:
             print()
             print(room_list[1].description)
@@ -118,7 +121,9 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 2 end
 
+        # room 3 start
         if current_room == room_list[2]:
             print()
             print(room_list[2].description)
@@ -146,7 +151,9 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 3 end
 
+        # room 4 start
         if current_room == room_list[3]:
             print()
             print(room_list[3].description)
@@ -174,7 +181,9 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 4 end
 
+        # room 5 start
         if current_room == room_list[4]:
             print()
             print(room_list[4].description)
@@ -202,7 +211,9 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 5 end
 
+        # room 6 start
         if current_room == room_list[5]:
             print()
             print(room_list[5].description)
@@ -230,7 +241,9 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 6 end
 
+        # room 7 start
         if current_room == room_list[6]:
             print()
             print(room_list[6].description)
@@ -258,6 +271,8 @@ def main():
                     current_room = room_list[current_room.west]
             else:
                 print("I do not understand that command, please try again.")
+                # room 7 end
 
 
+# initiate main function and start the program
 main()
