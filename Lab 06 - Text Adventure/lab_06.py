@@ -1,6 +1,4 @@
 # Define a class called room and adding constructor function
-
-
 class Room:
     def __init__(self, description, north, south, east, west):
         self.description = str(description)
@@ -11,15 +9,12 @@ class Room:
 
 
 # Defining the main function
-
-
 def main():
     # Creating an empty array
     room_list = []
     done = False
 
     # Creating rooms with attributes
-
     room0 = Room(
         "It's dark. The only light is a candle on a desk next to a bed. To your east is a door. All other sides are "
         "walls.",
@@ -52,7 +47,6 @@ def main():
         None, 4, None, None)
 
     # Append rooms to room_list
-
     room_list.append(room0)
     room_list.append(room1)
     room_list.append(room2)
@@ -62,13 +56,10 @@ def main():
     room_list.append(room6)
 
     # Set starting room
-
     current_room = room_list[0]
 
     # Create while loop to loop through the game until player is done
-
     while not done:
-
         if current_room == room_list[0]:
             print()
             print(room_list[0].description)
