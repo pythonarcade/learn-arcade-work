@@ -1,11 +1,11 @@
 """ Lab 7 - User Control """
 import arcade
-import random
 
 # --- Constants ---
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
-MOVEMENT_SPEED = 2
+# faster gives cool ghost like graphics behind the models
+MOVEMENT_SPEED = 4
 
 
 # draw light for the windows function
@@ -52,56 +52,71 @@ def tree(x, y):
     arcade.draw_triangle_filled(x - 30, y + 90, x, y + 130, x + 30, y + 90, arcade.color.DARK_GREEN)
 
 
-class Ball:
-    def __init__(self, position_x, position_y, change_x, change_y, radius, color):
+class PacMan:
+    def __init__(self, position_x, position_y, change_x, change_y, color):
         # Take the parameters of the init function above,
         # and create instance variables out of them.
         self.position_x = position_x
         self.position_y = position_y
         self.change_x = change_x
         self.change_y = change_y
-        self.radius = radius
+        self.color = color
+
+    def draw(self):
+        # Draw the pacman.
+        arcade.draw_circle_filled(self.position_x, self.position_y, 25, self.color)
+        arcade.draw_triangle_filled(self.position_x, self.position_y, self.position_x + 20, self.position_y + 18,
+                                    self.position_x + 20, self.position_y - 18, arcade.color.BLACK)
+        arcade.draw_triangle_filled(self.position_x + 27, self.position_y, self.position_x + 20, self.position_y + 18,
+                                    self.position_x + 20, self.position_y - 18, arcade.color.BLACK)
+        arcade.draw_circle_filled(self.position_x + 5, self.position_y + 17, 3, arcade.color.BLACK)
+
+    def update(self):
+        # Move the pacman
+        self.position_y += self.change_y
+        self.position_x += self.change_x
+
+
+class Ghost:
+    def __init__(self, position_x, position_y, change_x, change_y, color):
+        # Take the parameters of the init function above,
+        # and create instance variables out of them.
+        self.position_x = position_x
+        self.position_y = position_y
+        self.change_x = change_x
+        self.change_y = change_y
         self.color = color
 
         # edge sound
-        self.edge_sound = arcade.load_sound(":resources:")
-        self.edge_sound_player = None
-
-        if self.position_x < 8:
-            self.position_x = 8
-            if not self.edge_sound_player or not self.edge_sound_player.playing:
-                self.edge_sound_player = arcade.play_sound(self.edge_sound)
-                arcade.play_sound(self.edge_sound)
-
-        if self.position_y < 0:
-            self.position_y = 0
-            if not self.edge_sound_player or not self.edge_sound_player.playing:
-                self.edge_sound_player = arcade.play_sound(self.edge_sound)
-                arcade.play_sound(self.edge_sound)
-
-        if self.position_x > SCREEN_WIDTH - 25:
-            self.position_x = SCREEN_WIDTH - 25
-            if not self.edge_sound_player or not self.edge_sound_player.playing:
-                self.edge_sound_player = arcade.play_sound(self.edge_sound)
-                arcade.play_sound(self.edge_sound)
-
-        if self.position_y > SCREEN_HEIGHT - 50:
-            self.position_y = SCREEN_HEIGHT - 50
-            if not self.edge_sound_player or not self.edge_sound_player.playing:
-                self.edge_sound_player = arcade.play_sound(self.edge_sound)
-                arcade.play_sound(self.edge_sound)
+        self.edge_sound = arcade.load_sound(":resources:sounds/hit4.wav")
 
     def draw(self):
-        """ Draw the balls with the instance variables we have. """
-        arcade.draw_circle_filled(self.position_x,
-                                  self.position_y,
-                                  self.radius,
-                                  self.color)
+        # Draw the Ghost.
+        arcade.draw_rectangle_filled(self.position_x, self.position_y, 30, 30, self.color)
+        arcade.draw_circle_filled(self.position_x + 5, self.position_y + 5, 2, arcade.color.BLACK)
+        arcade.draw_circle_filled(self.position_x - 5, self.position_y + 5, 2, arcade.color.BLACK)
 
     def update(self):
-        # Move the ball
+        # Move the Ghost
         self.position_y += self.change_y
         self.position_x += self.change_x
+
+        # edge control, so we don't fly off the screen as well as edge sounds... the more the merrier.
+        if self.position_x < 15:
+            arcade.play_sound(self.edge_sound)
+            self.position_x = 15
+
+        if self.position_x > SCREEN_WIDTH - 15:
+            arcade.play_sound(self.edge_sound)
+            self.position_x = SCREEN_WIDTH - 15
+
+        if self.position_y < 15:
+            arcade.play_sound(self.edge_sound)
+            self.position_y = 15
+
+        if self.position_y > SCREEN_HEIGHT - 15:
+            arcade.play_sound(self.edge_sound)
+            self.position_y = SCREEN_HEIGHT - 15
 
 
 class MyGame(arcade.Window):
@@ -111,16 +126,23 @@ class MyGame(arcade.Window):
         """ Initializer """
 
         # Call the parent class initializer
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
-        # Create our ball
-        self.ball = Ball(50, 50, 0, 0, 15, arcade.color.WHITE)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control - Ghost")
 
+        # Make the mouse disappear when it is over the window.
+        # So we just see our object, not the pointer.
+        self.set_mouse_visible(False)
+
+        # Create our Ghosts
+        self.ghost1 = Ghost(200, 200, 0, 0, arcade.color.LIGHT_BLUE)
+        self.pacman = PacMan(400, 200, 0, 0, arcade.color.YELLOW)
+
+        # click sound for the mouse
+        self.click_sound = arcade.load_sound(":resources:sounds/laser5.wav")
+
+        # background color for the program
         arcade.set_background_color((27, 27, 27))
 
-        # sounds
-        self.click_sound1 = arcade.load_sound(":resources:")
-        self.click_sound2 = arcade.load_sound(":resources:")
-
+    # draw all the stuff!
     def on_draw(self):
         arcade.start_render()
 
@@ -148,35 +170,55 @@ class MyGame(arcade.Window):
         tree(850, 290)
         tree(920, 290)
 
+        # draw the mobile characters
+        self.ghost1.draw()
+        self.pacman.draw()
 
-        self.ball.draw()
-
+    # update the characters
     def update(self, delta_time):
-        self.ball.update()
+        self.ghost1.update()
+        self.pacman.update()
 
+    # on keypress move the ghost
     def on_key_press(self, key, modifiers):
         """ Called whenever the user presses a key. """
         if key == arcade.key.LEFT:
-            self.ball.change_x = -MOVEMENT_SPEED
+            self.ghost1.change_x = -MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
-            self.ball.change_x = MOVEMENT_SPEED
+            self.ghost1.change_x = MOVEMENT_SPEED
         elif key == arcade.key.UP:
-            self.ball.change_y = MOVEMENT_SPEED
+            self.ghost1.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
-            self.ball.change_y = -MOVEMENT_SPEED
+            self.ghost1.change_y = -MOVEMENT_SPEED
 
+    # on key release stop moving the ghost
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
         if key == arcade.key.LEFT or key == arcade.key.RIGHT:
-            self.ball.change_x = 0
+            self.ghost1.change_x = 0
         elif key == arcade.key.UP or key == arcade.key.DOWN:
-            self.ball.change_y = 0
+            self.ghost1.change_y = 0
+
+    # mouse controls for the pacman
+    def on_mouse_motion(self, x, y, dx, dy):
+        """ Called to update our objects.
+        Happens approximately 60 times per second."""
+        self.pacman.position_x = x
+        self.pacman.position_y = y
+
+    # mouse click controls to enact sound effects
+    def on_mouse_press(self, x, y, button, modifiers):
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            arcade.play_sound(self.click_sound)
+        elif button == arcade.MOUSE_BUTTON_RIGHT:
+            arcade.play_sound(self.click_sound)
 
 
-
+# throw everything into main to get called to start the program
 def main():
-    window = MyGame()
+    MyGame()
     arcade.run()
 
 
+# start the program
 main()
