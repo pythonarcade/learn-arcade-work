@@ -15,17 +15,58 @@ SCREEN_HEIGHT = 600
 
 
 # Good Sprite class
-class Good_Sprite(arcade.Sprite):
+class GoodSprite(arcade.Sprite):
+    def reset_pos(self):
+
+        # Reset the coin to a random spot above the screen
+        self.center_y = random.randrange(SCREEN_HEIGHT + 20,
+                                         SCREEN_HEIGHT + 100)
+        self.center_x = random.randrange(SCREEN_WIDTH)
 
     def update(self):
+
+        # Move the coin
         self.center_y -= 1
+
+        # See if the coin has fallen off the bottom of the screen.
+        # If so, reset it.
+        if self.top < 0:
+            self.reset_pos()
+
+        self.angle += 1
+
+        # If we rotate past 360, reset it back a turn.
+        if self.angle > 359:
+            self.angle -= 360
 
 
 # Bad Sprite class
-class Bad_Sprite(arcade.Sprite):
+class BadSprite(arcade.Sprite):
+    def __init__(self, filename, sprite_scaling):
+
+        super().__init__(filename, sprite_scaling)
+
+        self.change_x = 0
+        self.change_y = 0
 
     def update(self):
-        self.center_y -= 1
+
+        # Move the coin
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        # If we are out-of-bounds, then 'bounce'
+        if self.left < 0:
+            self.change_x *= -1
+
+        if self.right > SCREEN_WIDTH:
+            self.change_x *= -1
+
+        if self.bottom < 0:
+            self.change_y *= -1
+
+        if self.top > SCREEN_HEIGHT:
+            self.change_y *= -1
 
 
 class MyGame(arcade.Window):
@@ -77,7 +118,7 @@ class MyGame(arcade.Window):
         # Create the coins // good sprites
         for i in range(COIN_COUNT):
             # Create the coin instance
-            coin = arcade.Sprite(":resources:images/items/coinGold.png", SPRITE_SCALING_GOOD_OBJ)
+            coin = GoodSprite(":resources:images/items/coinGold.png", SPRITE_SCALING_GOOD_OBJ)
 
             # Position the coin
             coin.center_x = random.randrange(SCREEN_WIDTH)
@@ -89,11 +130,13 @@ class MyGame(arcade.Window):
         # Create the rocks // Bad sprites
         for i in range(ROCK_COUNT):
             # Create the rock instance
-            rock = arcade.Sprite(":resources:images/space_shooter/meteorGrey_med1.png", SPRITE_SCALING_BAD_OBJ)
+            rock = BadSprite(":resources:images/space_shooter/meteorGrey_med1.png", SPRITE_SCALING_BAD_OBJ)
 
             # Position the rock
             rock.center_x = random.randrange(SCREEN_WIDTH)
             rock.center_y = random.randrange(SCREEN_HEIGHT)
+            rock.change_x = random.randrange(-3, 4)
+            rock.change_y = random.randrange(-3, 4)
 
             # Add the coin to the lists
             self.bad_sprite_list.append(rock)
@@ -109,12 +152,22 @@ class MyGame(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
+        if len(self.coin_list) == 0:
+            # Draw Game Over
+            arcade.draw_text("GAME OVER", 325, 350, arcade.color.WHITE, 20)
+            # End Game Sound
+
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
 
         # Move the center of the player sprite to match the mouse x, y
         self.player_sprite.center_x = x
         self.player_sprite.center_y = y
+
+        # Freeze Player
+        if len(self.coin_list) == 0:
+            self.player_sprite.center_x = 400
+            self.player_sprite.center_y = 300
 
     def update(self, delta_time):
         """ Movement and game logic """
@@ -137,16 +190,17 @@ class MyGame(arcade.Window):
         for coin in coins_hit_list:
             arcade.play_sound(self.goodSpriteSound)
             coin.remove_from_sprite_lists()
-            self.score += 1
+            self.score += 10
 
         # Bad sprite loop
         for rock in bad_sprite_hit_list:
             arcade.play_sound(self.badSpriteSound)
             rock.remove_from_sprite_lists()
-            self.score -= 1
+            self.score -= 25
 
-        if self.score == 0:
-            arcade.finish_render()
+        if len(self.coin_list) == 0:
+            for rock in self.bad_sprite_list:
+                rock.remove_from_sprite_lists()
 
 
 def main():
