@@ -17,10 +17,10 @@ enemyMoveDownAmount = 30
 
 # player controls
 maxPlayerBullets = 5
-livesRemaining = 3
 
 # bullet controls
-bulletSpeed = 3
+playerBulletSpeed = 3
+enemyBulletSpeed = 3
 
 # game state
 gameOver = 1
