@@ -8,7 +8,9 @@ SCREEN_HEIGHT = 600
 arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing Example")
 
 # Задать белый цвет фона.
-#  Цвета также можно задавать в (красный, зеленый, синий) и
+# Для просмотра списка названий цветов прочитайте:
+# http://arcade.academy/arcade.color.html
+# Цвета также можно задавать в (красный, зеленый, синий) и
 # (красный, зеленый, синий, альфа) формате.
 arcade.set_background_color(arcade.color.WHITE)
 
